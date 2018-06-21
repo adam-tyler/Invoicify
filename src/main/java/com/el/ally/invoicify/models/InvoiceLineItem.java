@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "InvoiceLineItem")
-
 public class InvoiceLineItem{
 
 	@Id
@@ -25,6 +24,8 @@ public class InvoiceLineItem{
 	
 	@ManyToOne
 	private Invoice invoice;
+	
+	public InvoiceLineItem() {}
 	
 	public InvoiceLineItem(int id, BillingRecord billingRecord, Date createdOn, Invoice invoice) {
 		super();

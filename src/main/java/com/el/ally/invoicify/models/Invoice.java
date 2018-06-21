@@ -1,5 +1,8 @@
 package com.el.ally.invoicify.models;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,69 +18,72 @@ public class Invoice {
 
   @Id
   @GeneratedValue(generator="people_id_seq", strategy=GenerationType.AUTO)
- 
-  private Long id;
+  private int id;
 
-  @ManyToOne
-  private Invoice invoice;
   
-  private String date;
+  @ManyToOne
+  private Company company;
+  
+  private Date createdOn;
  
-  private String invoicedesription;
+  private String invoiceDesription;
 
   
  @OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
- private InvoiceLineItem lineItems;
+ private List<InvoiceLineItem> lineItems;
 
-
-public Long getId() {
+ public Invoice() {}
+public int getId() {
 	return id;
 }
 
 
-public void setId(Long id) {
+public void setId(int id) {
 	this.id = id;
 }
 
 
-public Invoice getInvoice() {
-	return invoice;
+public Company getCompany() {
+	return company;
 }
 
 
-public void setInvoice(Invoice invoice) {
-	this.invoice = invoice;
+public void setCompany(Company company) {
+	this.company = company;
 }
 
 
-public String getDate() {
-	return date;
+public Date getCreatedOn() {
+	return createdOn;
 }
 
 
-public void setDate(String date) {
-	this.date = date;
+public void setCreatedOn(Date createdOn) {
+	this.createdOn = createdOn;
 }
 
 
-public String getInvoicedesription() {
-	return invoicedesription;
+public String getInvoiceDesription() {
+	return invoiceDesription;
 }
 
 
-public void setInvoicedesription(String invoicedesription) {
-	this.invoicedesription = invoicedesription;
+public void setInvoiceDesription(String invoiceDesription) {
+	this.invoiceDesription = invoiceDesription;
 }
 
 
-public InvoiceLineItem getLineItems() {
+public List<InvoiceLineItem> getLineItems() {
 	return lineItems;
 }
 
 
-public void setLineItems(InvoiceLineItem lineItems) {
+public void setLineItems(List<InvoiceLineItem> lineItems) {
 	this.lineItems = lineItems;
 }
+
+
+
 
 
 
