@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Invoice {
 
   @Id
-  @GeneratedValue(generator="people_id_seq", strategy=GenerationType.AUTO)
+  @GeneratedValue
   private int id;
 
   

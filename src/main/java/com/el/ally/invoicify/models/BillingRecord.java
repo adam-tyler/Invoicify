@@ -16,8 +16,7 @@ import javax.persistence.Table;
 public abstract class BillingRecord {
 
   @Id
-  @GeneratedValue(generator="people_id_seq", strategy=GenerationType.AUTO)
-  
+  @GeneratedValue
   private int id;
 
   private Date createdOn;
