@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="invoice")
 public class Invoice {
@@ -20,11 +22,12 @@ public class Invoice {
 	@GeneratedValue
 	private int id;
 
+	@JsonIgnore
 	@ManyToOne
 	private Company company;
   
 	private Date createdOn;
-	private String invoiceDesription;
+	private String invoiceDescription;
 	
 	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
 	private List<InvoiceLineItem> lineItems;
@@ -55,12 +58,12 @@ public class Invoice {
 		this.createdOn = createdOn;
 	}
 
-	public String getInvoiceDesription() {
-		return invoiceDesription;
+	public String getinvoiceDescription() {
+		return invoiceDescription;
 	}
 
-	public void setInvoiceDesription(String invoiceDesription) {
-		this.invoiceDesription = invoiceDesription;
+	public void setinvoiceDescription(String invoiceDesription) {
+		this.invoiceDescription = invoiceDesription;
 	}
 
 	public List<InvoiceLineItem> getLineItems() {

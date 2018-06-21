@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="billingrecord")
 public abstract class BillingRecord {
@@ -26,7 +29,7 @@ public abstract class BillingRecord {
 	private InvoiceLineItem invoiceLineItem;
 
 	@ManyToOne 
-	private Company company;
+	private Company client;
   
 	public abstract double getTotal();
 
@@ -63,11 +66,11 @@ public abstract class BillingRecord {
 	}
 
 	public Company getCompany() {
-		return company;
+		return client;
 	}
 
 	public void setCompany(Company company) {
-		this.company = company;
+		this.client = company;
 	}
   
 }

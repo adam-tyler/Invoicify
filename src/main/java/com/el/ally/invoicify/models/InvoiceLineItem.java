@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name = "InvoiceLineItem")
 public class InvoiceLineItem{
@@ -17,11 +19,13 @@ public class InvoiceLineItem{
 	@GeneratedValue
 	private int id;
 	
+	@JsonIgnore
 	@OneToOne
 	private BillingRecord billingRecord;
 	
 	private Date createdOn;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Invoice invoice;
 	
