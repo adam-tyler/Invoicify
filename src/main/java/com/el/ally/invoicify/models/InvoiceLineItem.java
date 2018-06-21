@@ -33,6 +33,9 @@ public class InvoiceLineItem{
 		this.createdOn = createdOn;
 		this.invoice = invoice;
 	}
+	public InvoiceLineItem() {
+		
+	}
 
 	public int getId() {
 		return id;
