@@ -36,7 +36,7 @@ public class SeedData {
 		flatFeeBillingRecord.setAmount(100.0);
 		flatFeeBillingRecord.setCompany(company);
 		flatFeeBillingRecord.setCreatedOn(new Date());
-		flatFeeBillingRecord.setDescripton("Flat Fee Item");
+		flatFeeBillingRecord.setDescription("Flat Fee Item");
 		billingRecordRepo.save(flatFeeBillingRecord);
 		lineItem1.setBillingRecord(flatFeeBillingRecord);
 		invoiceLineItemRepo.save(lineItem1);
@@ -47,7 +47,7 @@ public class SeedData {
 		RateBasedBillingRecord rateBasedBillingRecord = new RateBasedBillingRecord();
 		rateBasedBillingRecord.setCompany(company);
 		rateBasedBillingRecord.setCreatedOn(new Date());
-		rateBasedBillingRecord.setDescripton("Rate Based Item");
+		rateBasedBillingRecord.setDescription("Rate Based Item");
 		rateBasedBillingRecord.setQuantity(2);
 		rateBasedBillingRecord.setRate(5);
 		lineItem2.setBillingRecord(rateBasedBillingRecord);

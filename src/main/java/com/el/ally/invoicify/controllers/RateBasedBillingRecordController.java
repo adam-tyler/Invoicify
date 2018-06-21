@@ -23,8 +23,9 @@ public class RateBasedBillingRecordController {
 	@Autowired
 	private CompanyRepository companyRepo;
 	
-	public RateBasedBillingRecordController(BillingRecordRepository billingRecordRepo) {
+	public RateBasedBillingRecordController(BillingRecordRepository billingRecordRepo, CompanyRepository companyRepo) {
 		this.billingRecordRepo = billingRecordRepo;
+		this.companyRepo = companyRepo;
 	}
 	
 	@PostMapping("/{clientId}")

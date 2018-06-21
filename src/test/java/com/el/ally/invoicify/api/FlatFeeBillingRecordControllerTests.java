@@ -11,8 +11,10 @@ import org.mockito.MockitoAnnotations;
 
 import com.el.ally.invoicify.controllers.FlatFeeBillingRecordController;
 import com.el.ally.invoicify.models.BillingRecord;
+import com.el.ally.invoicify.models.Company;
 import com.el.ally.invoicify.models.FlatFeeBillingRecord;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
+import com.el.ally.invoicify.repositories.CompanyRepository;
 
 public class FlatFeeBillingRecordControllerTests {
 
@@ -21,18 +23,24 @@ public class FlatFeeBillingRecordControllerTests {
 	@Mock
 	private BillingRecordRepository billingRecordRepo;
 	
+	@Mock
+	private CompanyRepository companyRepo;
+	
 	@Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        flatFeeBillingController = new FlatFeeBillingRecordController(billingRecordRepo);
+        flatFeeBillingController = new FlatFeeBillingRecordController(billingRecordRepo, companyRepo);
     }
 	
 	@Test
 	public void create_givenFlatFeeBillingRecord_shouldSaveAndReturn() {
         FlatFeeBillingRecord flatFeeBillingRecord = new FlatFeeBillingRecord();
+        Company client = new Company();
+        client.setId(1);
         when(billingRecordRepo.save(flatFeeBillingRecord)).thenReturn(flatFeeBillingRecord);
+        when(companyRepo.findOne(1)).thenReturn(client);
         
-        FlatFeeBillingRecord actual = flatFeeBillingController.create(flatFeeBillingRecord);
+        FlatFeeBillingRecord actual = flatFeeBillingController.create(1, flatFeeBillingRecord);
         
         assertThat(actual).isSameAs(flatFeeBillingRecord);
         verify(billingRecordRepo).save(flatFeeBillingRecord);

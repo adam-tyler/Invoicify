@@ -22,14 +22,16 @@ public class FlatFeeBillingRecordController {
 	@Autowired
 	private CompanyRepository companyRepo;
 	
-	public FlatFeeBillingRecordController(BillingRecordRepository billingRecordRepo) {
+	public FlatFeeBillingRecordController(BillingRecordRepository billingRecordRepo, CompanyRepository companyRepo) {
 		this.billingRecordRepo = billingRecordRepo;
+		this.companyRepo = companyRepo;
 	}
 	
 	@PostMapping("{clientId}")
 	public FlatFeeBillingRecord create(@PathVariable int clientId, @RequestBody FlatFeeBillingRecord flatFeeBillingRecord) {
 		Company company = companyRepo.findOne(clientId);
 		flatFeeBillingRecord.setCompany(company);
+		
 		return billingRecordRepo.save(flatFeeBillingRecord);
 	}
 }

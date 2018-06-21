@@ -23,7 +23,7 @@ public abstract class BillingRecord {
 	private int id;
 
 	private Date createdOn;
-	private String descripton;
+	private String description;
 
 	@OneToOne(mappedBy="billingRecord")
 	private InvoiceLineItem invoiceLineItem;
@@ -49,12 +49,12 @@ public abstract class BillingRecord {
 		this.createdOn = createdOn;
 	}
 
-	public String getDescripton() {
-		return descripton;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setDescripton(String descripton) {
-		this.descripton = descripton;
+	public void setDescription(String descripton) {
+		this.description = descripton;
 	}
 
 	public InvoiceLineItem getInvoiceLineItem() {
