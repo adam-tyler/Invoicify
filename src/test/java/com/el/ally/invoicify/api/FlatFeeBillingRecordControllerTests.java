@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.el.ally.invoicify.controllers.FlatFeeBillingRecordController;
+import com.el.ally.invoicify.models.BillingRecord;
 import com.el.ally.invoicify.models.FlatFeeBillingRecord;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
 
@@ -31,7 +32,7 @@ public class FlatFeeBillingRecordControllerTests {
         FlatFeeBillingRecord flatFeeBillingRecord = new FlatFeeBillingRecord();
         when(billingRecordRepo.save(flatFeeBillingRecord)).thenReturn(flatFeeBillingRecord);
         
-        FlatFeeBillingRecord actual = new FlatFeeBillingRecord();
+        FlatFeeBillingRecord actual = flatFeeBillingController.create(flatFeeBillingRecord);
         
         assertThat(actual).isSameAs(flatFeeBillingRecord);
         verify(billingRecordRepo).save(flatFeeBillingRecord);

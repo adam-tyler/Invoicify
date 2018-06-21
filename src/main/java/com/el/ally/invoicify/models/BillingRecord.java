@@ -15,64 +15,60 @@ import javax.persistence.Table;
 @Table(name="billingrecord")
 public abstract class BillingRecord {
 
-  @Id
-  @GeneratedValue
-  private int id;
+	@Id
+	@GeneratedValue
+	private int id;
 
-  private Date createdOn;
+	private Date createdOn;
+	private String descripton;
 
- 
-  private String descripton;
+	@OneToOne(mappedBy="billingRecord")
+	private InvoiceLineItem invoiceLineItem;
 
-  @OneToOne(mappedBy="billingRecord")
-  private InvoiceLineItem invoiceLineItem;
-
-  @ManyToOne 
-  private Company company;
+	@ManyToOne 
+	private Company company;
   
-  public abstract double getTotal();
+	public abstract double getTotal();
 
-public int getId() {
-	return id;
-}
+	public int getId() {
+		return id;
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-public Date getCreatedOn() {
-	return createdOn;
-}
+	public Date getCreatedOn() {
+		return createdOn;
+	}
 
-public void setCreatedOn(Date createdOn) {
-	this.createdOn = createdOn;
-}
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
 
-public String getDescripton() {
-	return descripton;
-}
+	public String getDescripton() {
+		return descripton;
+	}
 
-public void setDescripton(String descripton) {
-	this.descripton = descripton;
-}
+	public void setDescripton(String descripton) {
+		this.descripton = descripton;
+	}
 
-public InvoiceLineItem getInvoiceLineItem() {
-	return invoiceLineItem;
-}
+	public InvoiceLineItem getInvoiceLineItem() {
+		return invoiceLineItem;
+	}
 
-public void setInvoiceLineItem(InvoiceLineItem invoiceLineItem) {
-	this.invoiceLineItem = invoiceLineItem;
-}
+	public void setInvoiceLineItem(InvoiceLineItem invoiceLineItem) {
+		this.invoiceLineItem = invoiceLineItem;
+	}
 
-public Company getCompany() {
-	return company;
-}
+	public Company getCompany() {
+		return company;
+	}
 
-public void setCompany(Company company) {
-	this.company = company;
-}
-
-  
+	public void setCompany(Company company) {
+		this.company = company;
+	}
   
 }
 

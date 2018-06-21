@@ -16,75 +16,59 @@ import javax.persistence.Table;
 @Table(name="invoice")
 public class Invoice {
 
-  @Id
-  @GeneratedValue
-  private int id;
+	@Id
+	@GeneratedValue
+	private int id;
 
+	@ManyToOne
+	private Company company;
   
-  @ManyToOne
-  private Company company;
-  
-  private Date createdOn;
- 
-  private String invoiceDesription;
+	private Date createdOn;
+	private String invoiceDesription;
+	
+	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
+	private List<InvoiceLineItem> lineItems;
 
-  
- @OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
- private List<InvoiceLineItem> lineItems;
+	public Invoice() {}
+	
+	public int getId() {
+		return id;
+	}
 
- public Invoice() {}
-public int getId() {
-	return id;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public Company getCompany() {
+		return company;
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 
+	public Date getCreatedOn() {
+		return createdOn;
+	}
 
-public Company getCompany() {
-	return company;
-}
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
 
+	public String getInvoiceDesription() {
+		return invoiceDesription;
+	}
 
-public void setCompany(Company company) {
-	this.company = company;
-}
+	public void setInvoiceDesription(String invoiceDesription) {
+		this.invoiceDesription = invoiceDesription;
+	}
 
+	public List<InvoiceLineItem> getLineItems() {
+		return lineItems;
+	}
 
-public Date getCreatedOn() {
-	return createdOn;
-}
-
-
-public void setCreatedOn(Date createdOn) {
-	this.createdOn = createdOn;
-}
-
-
-public String getInvoiceDesription() {
-	return invoiceDesription;
-}
-
-
-public void setInvoiceDesription(String invoiceDesription) {
-	this.invoiceDesription = invoiceDesription;
-}
-
-
-public List<InvoiceLineItem> getLineItems() {
-	return lineItems;
-}
-
-
-public void setLineItems(List<InvoiceLineItem> lineItems) {
-	this.lineItems = lineItems;
-}
-
-
-
-
-
+	public void setLineItems(List<InvoiceLineItem> lineItems) {
+		this.lineItems = lineItems;
+	}
 
 }

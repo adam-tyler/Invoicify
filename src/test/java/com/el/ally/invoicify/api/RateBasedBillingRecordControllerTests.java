@@ -9,12 +9,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.el.ally.invoicify.controllers.RateBasedBillingRecordController;
 import com.el.ally.invoicify.models.RateBasedBillingRecord;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
 
 public class RateBasedBillingRecordControllerTests {
 
-	private RateBasedBillingRecordController rateBasedBillingControler;
+	private RateBasedBillingRecordController rateBasedBillingController;
 	
 	@Mock
 	private BillingRecordRepository billingRecordRepo;
@@ -22,7 +23,7 @@ public class RateBasedBillingRecordControllerTests {
 	@Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        rateBasedBillingControler = new RateBasedBillingRecordController(billingRecordRepo);
+        rateBasedBillingController = new RateBasedBillingRecordController(billingRecordRepo);
     }
 	
 	@Test
@@ -30,7 +31,7 @@ public class RateBasedBillingRecordControllerTests {
         RateBasedBillingRecord rateBasedBillingRecord = new RateBasedBillingRecord();
         when(billingRecordRepo.save(rateBasedBillingRecord)).thenReturn(rateBasedBillingRecord);
         
-        RateBasedBillingRecord actual = new RateBasedBillingRecord();
+        RateBasedBillingRecord actual = rateBasedBillingController.create(rateBasedBillingRecord);
         
         assertThat(actual).isSameAs(rateBasedBillingRecord);
         verify(billingRecordRepo).save(rateBasedBillingRecord);
