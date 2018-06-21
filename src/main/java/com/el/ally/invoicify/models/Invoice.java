@@ -58,11 +58,11 @@ public class Invoice {
 		this.createdOn = createdOn;
 	}
 
-	public String getinvoiceDescription() {
+	public String getInvoiceDescription() {
 		return invoiceDescription;
 	}
 
-	public void setinvoiceDescription(String invoiceDesription) {
+	public void setInvoiceDescription(String invoiceDesription) {
 		this.invoiceDescription = invoiceDesription;
 	}
 

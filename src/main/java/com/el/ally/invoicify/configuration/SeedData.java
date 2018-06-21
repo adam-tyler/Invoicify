@@ -61,7 +61,7 @@ public class SeedData {
 		Invoice invoice = new Invoice();
 		invoice.setCompany(company);
 		invoice.setCreatedOn(new Date());
-		invoice.setinvoiceDescription("An invoice for Ally");
+		invoice.setInvoiceDescription("An invoice for Ally");
 		invoiceRepo.save(invoice);
 		
 		lineItem1.setInvoice(invoice);
