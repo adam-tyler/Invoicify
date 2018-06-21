@@ -24,7 +24,7 @@ public class Invoice {
 	private Company company;
   
 	private Date createdOn;
-	private String invoiceDesription;
+	private String invoiceDescription;
 	
 	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
 	private List<InvoiceLineItem> lineItems;
@@ -56,11 +56,11 @@ public class Invoice {
 	}
 
 	public String getInvoiceDesription() {
-		return invoiceDesription;
+		return invoiceDescription;
 	}
 
 	public void setInvoiceDesription(String invoiceDesription) {
-		this.invoiceDesription = invoiceDesription;
+		this.invoiceDescription = invoiceDesription;
 	}
 
 	public List<InvoiceLineItem> getLineItems() {
