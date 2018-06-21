@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.el.ally.invoicify.controllers.FlatFeeBillingRecordController;
 import com.el.ally.invoicify.models.FlatFeeBillingRecord;
+import com.el.ally.invoicify.repositories.BillingRecordRepository;
 
 public class FlatFeeBillingRecordControllerTests {
 

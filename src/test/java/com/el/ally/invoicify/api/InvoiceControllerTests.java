@@ -1,15 +1,20 @@
 package com.el.ally.invoicify.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.el.ally.invoicify.controllers.InvoiceController;
 import com.el.ally.invoicify.models.Invoice;
+import com.el.ally.invoicify.repositories.InvoiceRepository;
 
 public class InvoiceControllerTests {
 
@@ -21,7 +26,7 @@ public class InvoiceControllerTests {
 	@Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        InvoiceController = new InvoiceController(invoiceRepo);
+        invoiceController = new InvoiceController(invoiceRepo);
     }
 	
 	@Test
@@ -29,7 +34,7 @@ public class InvoiceControllerTests {
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
 		when(invoiceRepo.findAll()).thenReturn(invoices);
 		
-		ArrayList<Invoice> actual = invoiceController.list();
+		List<Invoice> actual = invoiceController.list();
 		
 		assertThat(actual.size()).isEqualTo(invoices.size());
 		verify(invoiceRepo).findAll();
@@ -42,7 +47,7 @@ public class InvoiceControllerTests {
 		
 		when(invoiceRepo.findAll()).thenReturn(invoices);
 		
-		ArrayList<Invoice> actual = invoiceController.list();
+		List<Invoice> actual = invoiceController.list();
 		
 		assertThat(actual.size()).isEqualTo(invoices.size());
 		verify(invoiceRepo).findAll();
