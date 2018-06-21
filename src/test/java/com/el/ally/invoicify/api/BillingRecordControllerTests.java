@@ -7,6 +7,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.el.ally.invoicify.models.BillingRecord;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class BillingRecordControllerTests {
 
 	private BillingRecordController billingController;
@@ -22,7 +26,7 @@ public class BillingRecordControllerTests {
 	
 	@Test
 	public void list_givenNoBillingRecords_shouldReturnEmptyList() {
-		ArrayList<BillingRecord> billingRecords = new ArrayList<BillingRecords>();
+		ArrayList<BillingRecord> billingRecords = new ArrayList<BillingRecord>();
 		when(billingRecordRepo.findAll()).thenReturn(billingRecords);
 		
 		ArrayList<BillingRecord> actual = billingController.list();
