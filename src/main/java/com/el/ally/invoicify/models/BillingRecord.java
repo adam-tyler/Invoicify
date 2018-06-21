@@ -1,5 +1,6 @@
 package com.el.ally.invoicify.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,35 +18,35 @@ public abstract class BillingRecord {
   @Id
   @GeneratedValue(generator="people_id_seq", strategy=GenerationType.AUTO)
   
-  private Long id;
+  private int id;
 
-  private String date;
+  private Date createdOn;
 
  
   private String descripton;
 
   @OneToOne(mappedBy="billingRecord")
-   private List<BillingRecord> billingRecords;
+  private InvoiceLineItem invoiceLineItem;
 
   @ManyToOne 
   private Company company;
   
   public abstract double getTotal();
 
-public Long getId() {
+public int getId() {
 	return id;
 }
 
-public void setId(Long id) {
+public void setId(int id) {
 	this.id = id;
 }
 
-public String getDate() {
-	return date;
+public Date getCreatedOn() {
+	return createdOn;
 }
 
-public void setDate(String date) {
-	this.date = date;
+public void setCreatedOn(Date createdOn) {
+	this.createdOn = createdOn;
 }
 
 public String getDescripton() {
@@ -56,12 +57,12 @@ public void setDescripton(String descripton) {
 	this.descripton = descripton;
 }
 
-public List<BillingRecord> getBillingRecords() {
-	return billingRecords;
+public InvoiceLineItem getInvoiceLineItem() {
+	return invoiceLineItem;
 }
 
-public void setBillingRecords(List<BillingRecord> billingRecords) {
-	this.billingRecords = billingRecords;
+public void setInvoiceLineItem(InvoiceLineItem invoiceLineItem) {
+	this.invoiceLineItem = invoiceLineItem;
 }
 
 public Company getCompany() {
@@ -71,8 +72,7 @@ public Company getCompany() {
 public void setCompany(Company company) {
 	this.company = company;
 }
-  
-  
+
   
   
 }
