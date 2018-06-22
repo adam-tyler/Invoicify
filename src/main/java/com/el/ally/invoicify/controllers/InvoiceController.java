@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.el.ally.invoicify.models.BillingRecord;
 import com.el.ally.invoicify.models.Invoice;
 import com.el.ally.invoicify.models.InvoiceLineItem;
 import com.el.ally.invoicify.models.InvoiceView;
+import com.el.ally.invoicify.models.User;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
 import com.el.ally.invoicify.repositories.CompanyRepository;
 import com.el.ally.invoicify.repositories.InvoiceRepository;
@@ -46,7 +48,9 @@ public class InvoiceController {
 	}
 	
 	@PostMapping("{clientId}")
-	public Invoice createInvoice(@RequestBody InvoiceView invoiceView, @PathVariable int clientId) {
+	public Invoice createInvoice(@RequestBody InvoiceView invoiceView, @PathVariable int clientId, Authentication auth) {
+		User user = (User) auth.getPrincipal();
+		
 		List<BillingRecord> records = billingRepo.findByIdIn(invoiceView.getRecordIds());
 		long nowish = Calendar.getInstance().getTimeInMillis();
 		Date now = new Date(nowish);
@@ -59,11 +63,13 @@ public class InvoiceController {
 			lineItem.setBillingRecord(record);
 			lineItem.setCreatedOn(now);
 			lineItem.setInvoice(invoice);
+			lineItem.setCreatedBy(user);
 			items.add(lineItem);
 		}
 		
 		invoice.setLineItems(items);
 		invoice.setCreatedOn(now);
+		invoice.setCreatedBy(user);
 		invoice.setCompany(companyRepo.findOne(clientId));
 		
 		return invoiceRepo.save(invoice);
