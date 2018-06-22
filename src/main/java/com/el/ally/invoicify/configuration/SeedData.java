@@ -82,6 +82,5 @@ public class SeedData {
 		invoiceLineItemRepo.save(lineItem1);
 		invoiceLineItemRepo.save(lineItem2);
 		
-		
 	}
 }

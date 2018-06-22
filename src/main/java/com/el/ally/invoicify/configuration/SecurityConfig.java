@@ -14,7 +14,7 @@ import com.el.ally.invoicify.services.AppUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private AppUserDetailsService userDetailsService;
+	private AppUserDetailsService userDetailsService;
 
     public SecurityConfig(AppUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -24,13 +24,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //require authorization for everything else
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http    
+    	http    
             .authorizeRequests()
-                .antMatchers(HttpMethod.PUT, "/api/session").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/user").permitAll()    
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .and()
-                .csrf().disable();
+	            .antMatchers(HttpMethod.PUT, "/api/session").permitAll()
+	        	.antMatchers(HttpMethod.POST, "/api/user").permitAll()    
+	        	.antMatchers(HttpMethod.OPTIONS).permitAll()
+	        	.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
+	        	.anyRequest().authenticated()
+	        	.and()
+	        	.csrf().disable();
     }
 
     @Bean
