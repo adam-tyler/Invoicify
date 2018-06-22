@@ -31,6 +31,9 @@ public class Invoice {
 	
 	@OneToMany(mappedBy="invoice", cascade=CascadeType.ALL)
 	private List<InvoiceLineItem> lineItems;
+	
+	@ManyToOne
+	private User createdBy;
 
 	public Invoice() {}
 	
@@ -72,6 +75,14 @@ public class Invoice {
 
 	public void setLineItems(List<InvoiceLineItem> lineItems) {
 		this.lineItems = lineItems;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
 	}
 
 }

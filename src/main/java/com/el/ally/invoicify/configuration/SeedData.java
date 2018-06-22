@@ -11,10 +11,12 @@ import com.el.ally.invoicify.models.FlatFeeBillingRecord;
 import com.el.ally.invoicify.models.Invoice;
 import com.el.ally.invoicify.models.InvoiceLineItem;
 import com.el.ally.invoicify.models.RateBasedBillingRecord;
+import com.el.ally.invoicify.models.User;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
 import com.el.ally.invoicify.repositories.CompanyRepository;
 import com.el.ally.invoicify.repositories.InvoiceLineItemRepository;
 import com.el.ally.invoicify.repositories.InvoiceRepository;
+import com.el.ally.invoicify.repositories.UserRepository;
 
 @Configuration
 @Profile("development")
@@ -23,7 +25,13 @@ public class SeedData {
 	public SeedData(BillingRecordRepository billingRecordRepo,
 			CompanyRepository companyRepo,
 			InvoiceLineItemRepository invoiceLineItemRepo,
-			InvoiceRepository invoiceRepo) {
+			InvoiceRepository invoiceRepo,
+			UserRepository userRepo) {
+		
+		User user = new User();
+		user.setUsername("admin");
+		user.setPassword("password");
+		userRepo.save(user);
 		
 		Company company = new Company();
 		company.setName("Ally Bank");
@@ -31,18 +39,21 @@ public class SeedData {
 		
 		InvoiceLineItem lineItem1 = new InvoiceLineItem();
 		lineItem1.setCreatedOn(new Date());
+		lineItem1.setCreatedBy(user);
 
 		FlatFeeBillingRecord flatFeeBillingRecord = new FlatFeeBillingRecord();
 		flatFeeBillingRecord.setAmount(100.0);
 		flatFeeBillingRecord.setCompany(company);
 		flatFeeBillingRecord.setCreatedOn(new Date());
 		flatFeeBillingRecord.setDescription("Flat Fee Item");
+		flatFeeBillingRecord.setCreatedBy(user);
 		billingRecordRepo.save(flatFeeBillingRecord);
 		lineItem1.setBillingRecord(flatFeeBillingRecord);
 		invoiceLineItemRepo.save(lineItem1);
 		
 		InvoiceLineItem lineItem2 = new InvoiceLineItem();
 		lineItem2.setCreatedOn(new Date());
+		lineItem2.setCreatedBy(user);
 		
 		RateBasedBillingRecord rateBasedBillingRecord = new RateBasedBillingRecord();
 		rateBasedBillingRecord.setCompany(company);
@@ -50,6 +61,7 @@ public class SeedData {
 		rateBasedBillingRecord.setDescription("Rate Based Item");
 		rateBasedBillingRecord.setQuantity(2);
 		rateBasedBillingRecord.setRate(5);
+		rateBasedBillingRecord.setCreatedBy(user);
 		lineItem2.setBillingRecord(rateBasedBillingRecord);
 		billingRecordRepo.save(rateBasedBillingRecord);
 		invoiceLineItemRepo.save(lineItem2);
@@ -62,11 +74,14 @@ public class SeedData {
 		invoice.setCompany(company);
 		invoice.setCreatedOn(new Date());
 		invoice.setInvoiceDescription("An invoice for Ally");
+		invoice.setCreatedBy(user);
 		invoiceRepo.save(invoice);
 		
 		lineItem1.setInvoice(invoice);
 		lineItem2.setInvoice(invoice);
 		invoiceLineItemRepo.save(lineItem1);
 		invoiceLineItemRepo.save(lineItem2);
+		
+		
 	}
 }

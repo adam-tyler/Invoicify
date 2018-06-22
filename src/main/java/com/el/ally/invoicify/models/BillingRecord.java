@@ -30,6 +30,9 @@ public abstract class BillingRecord {
 
 	@ManyToOne 
 	private Company client;
+	
+	@ManyToOne
+	private User createdBy;
   
 	public abstract double getTotal();
 
@@ -71,6 +74,14 @@ public abstract class BillingRecord {
 
 	public void setCompany(Company company) {
 		this.client = company;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
 	}
   
 }
