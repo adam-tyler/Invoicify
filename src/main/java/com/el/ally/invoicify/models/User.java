@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 //user is a reserved word in psql so we change the table name to avoid issues
 @Table(name="app_user")
@@ -18,7 +21,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Column(nullable=false)
     private String password;
@@ -68,11 +71,11 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
