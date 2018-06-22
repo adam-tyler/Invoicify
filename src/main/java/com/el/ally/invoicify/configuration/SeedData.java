@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.el.ally.invoicify.models.Company;
 import com.el.ally.invoicify.models.FlatFeeBillingRecord;
@@ -26,11 +27,13 @@ public class SeedData {
 			CompanyRepository companyRepo,
 			InvoiceLineItemRepository invoiceLineItemRepo,
 			InvoiceRepository invoiceRepo,
-			UserRepository userRepo) {
+			UserRepository userRepo,
+			PasswordEncoder encoder) {
 		
 		User user = new User();
 		user.setUsername("admin");
-		user.setPassword("password");
+		String encryptedPassword = encoder.encode("password");
+        user.setPassword(encryptedPassword);
 		userRepo.save(user);
 		
 		Company company = new Company();
