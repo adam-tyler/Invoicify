@@ -1,5 +1,9 @@
 package com.el.ally.invoicify.controllers;
 
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.el.ally.invoicify.models.User;
 import com.el.ally.invoicify.repositories.UserRepository;
 
 @RestController
@@ -29,14 +34,14 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User getUser(@PathVariable Long id) {
+    public User getUser(@PathVariable int id) {
         User User = this.userRepository.findOne(id);
         return User;
     }
 
 
     @PutMapping("{id}")
-    public User updateUser(Authentication auth, @RequestBody User user, @PathVariable Long id) {
+    public User updateUser(Authentication auth, @RequestBody User user, @PathVariable int id) {
         User currentUserData = this.userRepository.findOne(id);
         user.setId(currentUserData.getId());
 
