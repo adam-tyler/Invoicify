@@ -20,13 +20,8 @@ import com.el.ally.invoicify.repositories.CompanyRepository;
 @RequestMapping("/api/company")
 
 public class CompanyController {
-@Autowired	
-
-
-
+  @Autowired
   private CompanyRepository companyrepo;
-@Autowired
-
 
   public CompanyController(CompanyRepository companyrepo) {
     this.companyrepo = companyrepo;
@@ -61,6 +56,6 @@ public class CompanyController {
     return company;
   }
   
-	}
+}
 
 
