@@ -2,8 +2,9 @@ language: java
 services:
 - postgresql
 before_script:
-- psql -c 'create database invoicify;' -U postgres
-- psql -c 'CREATE USER "user" WITH PASSWORD "password";' -U postgres
+  - psql -c 'create database invoicify;' -U postgres
+  - psql -c "CREATE USER testuser WITH PASSWORD 'admin';" -U postgres
 deploy:
+  provider: heroku
   api_k:
     secure: CdHcJMcbQYbUI2u9s/OwBiSIda6MZMPKS8MIemCI+AjmCr02n2FLy8goRoWlJd/UNyIeVCp3qwPL6LlMmb8cBPxkpW2RLn2gxGKNbps9mp9syZie6EgNPK6G5TOUX0ZQkJJSMlQlWLrRGUW3U918o1rIAMR7r+1jL829nvsEHolCb16q/4t529N/BjVCoC5PKXQTJfTfuhyOBR9YJB5A8yQODPRts+9rulOyPJFNPTXK5u92aRcOdowAKRta/wwXoRjtlBQ7tpAFHi/Sr5C8+YbmCBenMx483jI6MH2r0do5TXPf0svjnH7vSMpob7mevqF5uQO/rkuBumSh8LtS8nfaKZ+DYZHgzCQ4xjXQaPGZyAF42xLvKr13HGYzI39qgUJ1O0KE4Gmaj53rmAsyZNggFfB0mVCCPJX7Ad1aNCP9HLqHHDdKhWdZiHvWSx29Rpjsd32XBgL+rm6ypg4Zu814q9ptyVoWq5GgCHZ5/q6xNNhRy9fiZXuZaegRa0SD4U1aHuqUSyHEzRCvXe8tc/1wYcxvrbBXSc95DDIbFQe023Gtd31wLx9R09JrzT8+CLljKGLeIdvUZuaQG2T/BDj+xEy1rreSR3BqiDy25kLHF3JsyWpSuD9/Iu6TtrItxax1ROEQIaNrJo24Qq36Atp3UzpCz7rAfcUx1SCAbp8=
