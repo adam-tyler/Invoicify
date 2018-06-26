@@ -8,10 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
 
 import com.el.ally.invoicify.controllers.RateBasedBillingRecordController;
 import com.el.ally.invoicify.models.Company;
 import com.el.ally.invoicify.models.RateBasedBillingRecord;
+import com.el.ally.invoicify.models.User;
 import com.el.ally.invoicify.repositories.BillingRecordRepository;
 import com.el.ally.invoicify.repositories.CompanyRepository;
 
@@ -24,6 +26,9 @@ public class RateBasedBillingRecordControllerTests {
 	
 	@Mock
 	private CompanyRepository companyRepo;
+	
+	@Mock
+	private Authentication auth;
 	
 	@Before
     public void setUp() {
@@ -38,8 +43,9 @@ public class RateBasedBillingRecordControllerTests {
         client.setId(1);
         when(billingRecordRepo.save(rateBasedBillingRecord)).thenReturn(rateBasedBillingRecord);
         when(companyRepo.findOne(1)).thenReturn(client);
+        when(auth.getPrincipal()).thenReturn(new User());
         
-        RateBasedBillingRecord actual = rateBasedBillingController.create(1,rateBasedBillingRecord);
+        RateBasedBillingRecord actual = rateBasedBillingController.create(1,rateBasedBillingRecord, auth);
         
         assertThat(actual).isSameAs(rateBasedBillingRecord);
         verify(billingRecordRepo).save(rateBasedBillingRecord);
