@@ -2,4 +2,4 @@ language: java
 services:
   - postgresql
 before_script:
-  - psql -c 'create database invoicify;' -U user -P password
+  - psql -c 'create database invoicify;' -U postgres
